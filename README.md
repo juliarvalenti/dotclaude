@@ -56,3 +56,15 @@ Not a framework. Not opinions for anyone else. This is scaffolding I copy into n
 ## What this isn't
 
 I intentionally avoid persona skills — no `pr-reviewer`, no `code-writer`, no `research-partner`, no "you are an expert X who always Y." Those patterns ask the agent to play a character, which bloats context and doesn't compose. This repo treats the skill system as **macros**: shortcuts I can invoke mid-flow to request a specific action, load only the context I need, and manipulate the agent's behavior in the moment. Aimed at pair-coding, not autonomous agents.
+
+## Context lives on GitHub
+
+Context management, design history, and in-progress status all live on GitHub — not in separate planning docs, not in a sidecar memory system, not in bespoke spec files. The tooling here is shaped around that.
+
+- **PRs hold design decisions.** The description is the artifact: reader-facing, under my name, searchable via `gh cli`. `/ship` enforces the "finished artifact, not session diary" tone so this durability actually pays off.
+- **PR comments hold in-progress status.** Checkpoints, parked work, discoveries mid-build. `/note` drops them at natural breakpoints so future-me (or a coworker) can reconstruct how a PR evolved.
+- **Wikis hold conversations.** Long-form discussion, architecture notes, onboarding, anything that outlives a single PR and doesn't want to live in the code.
+
+`/recall` searches across all three (plus past Claude Code sessions). If the context exists, it's reachable with `gh`. No special index to maintain, no drift between docs and code — just the public trail of the work.
+
+This is an explicitly developer-shaped workflow. If you're not working on GitHub, most of what's here won't map.
