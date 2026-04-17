@@ -99,17 +99,3 @@ Same as library but `"declaration": false` (no one imports your CLI as a library
 ### Monorepo package with project references
 Add `"composite": true` to each package, then wire up `references` in consumers. Lets `tsc --build` incrementally compile only what changed.
 
-## On the "ESLint vs tsconfig" question
-
-**Some checks are only possible in the type checker** because ESLint doesn't have full type info even with the typed plugin:
-- Exhaustive null checks (`strictNullChecks`)
-- Array access safety (`noUncheckedIndexedAccess`)
-- Override correctness (`noImplicitOverride`)
-
-**Some checks are best in ESLint** because they're lint-shaped, not type-shaped:
-- Unused variables (auto-fixable, per-file overridable)
-- Import ordering (not a type concern)
-- Naming conventions
-- "No console.log in production" style rules
-
-**Rule of thumb:** if the check is about type relationships, use tsconfig. If it's about code style or usage patterns, use ESLint. There's no reason to pick one over the other — use both.
