@@ -20,7 +20,9 @@ Not a framework. Not opinions for anyone else. This is scaffolding I copy into n
 - **[`skills/grab/`](skills/grab/SKILL.md)** — read/write clipboard, open last download, view last screenshot
 - **[`skills/recall/`](skills/recall/SKILL.md)** — reconstruct context (current git state, past sessions, or past PRs)
 - **[`skills/handoff/`](skills/handoff/SKILL.md)** — pack a context dump for a fresh session
-- **[`skills/kill-port/`](skills/kill-port/SKILL.md)** — free a TCP port
+- **[`skills/net/`](skills/net/SKILL.md)** — ports (show / kill / all listening), local + public IP, DNS lookup
+- **[`skills/disk/`](skills/disk/SKILL.md)** — observational disk usage: free space, biggest dirs, Docker disk, drill-down
+- **[`skills/notify/`](skills/notify/SKILL.md)** — send a macOS notification from the agent (task done, input needed)
 - **[`skills/docker/`](skills/docker/SKILL.md)** — containers + compose (list, logs, shell, prune, up/down)
 - **[`skills/pm2/`](skills/pm2/SKILL.md)** — PM2 process ops (list, logs, restart, stop, delete), local or over SSH
 - **[`skills/ship/`](skills/ship/SKILL.md)** — full flow from changes to merged PR (branch → precommit → commit → PR → watch → merge)
