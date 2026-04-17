@@ -1,4 +1,12 @@
-# dotclaude
+```
+      .o8                .             oooo                              .o8
+     "888              .o8             `888                             "888
+ .oooo888   .ooooo.  .o888oo  .ooooo.   888   .oooo.   oooo  oooo   .oooo888   .ooooo.
+d88' `888  d88' `88b   888   d88' `"Y8  888  `P  )88b  `888  `888  d88' `888  d88' `88b
+888   888  888   888   888   888        888   .oP"888   888   888  888   888  888ooo888
+888   888  888   888   888 . 888   .o8  888  d8(  888   888   888  888   888  888    .o
+`Y8bod88P" `Y8bod8P'   "888" `Y8bod8P' o888o `Y888""8o  `V88V"V8P' `Y8bod88P" `Y8bod8P'
+```
 
 My personal boilerplate for Claude Code: the `CLAUDE.md` shape I reach for, the skills I reuse across projects, and a style checklist I run new repos against.
 
