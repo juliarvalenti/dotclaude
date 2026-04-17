@@ -121,19 +121,30 @@ Checkpoints: breadcrumbs of work-in-progress. Not the PR description (that's the
        }) { discussion { id number url } }
      }' -F repo="$REPO_ID" -F cat="$CATEGORY_ID" -F title="$TITLE" -F body="$BODY")
 
+   DISCUSSION_ID=$(echo "$RESULT" | jq -r '.data.createDiscussion.discussion.id')
    NUMBER=$(echo "$RESULT" | jq -r '.data.createDiscussion.discussion.number')
    URL=$(echo "$RESULT" | jq -r '.data.createDiscussion.discussion.url')
    ```
 
-5. **Apply the `ai-drafted` label**. Labels work across Issues, PRs, and Discussions via the REST API:
+5. **Apply the `ai-drafted` label**. GitHub's `/issues/<N>/labels` REST endpoint returns 404 for Discussions — the label *system* is shared, but the labeling *endpoint* is not. Use the GraphQL `addLabelsToLabelable` mutation on the Discussion's node ID:
    ```bash
    # Create the label if it doesn't exist (one-time, idempotent via `|| true`)
    gh api repos/${REPO}/labels -f name='ai-drafted' -f color='9b6dff' -f description='Drafted by an LLM, pending human review' 2>/dev/null || true
 
-   # Apply to the discussion
-   gh api repos/${REPO}/issues/${NUMBER}/labels -f labels='["ai-drafted"]'
+   # Look up the label's node ID
+   LABEL_ID=$(gh api graphql -f query='
+     query($owner:String!, $name:String!) {
+       repository(owner:$owner, name:$name) { label(name:"ai-drafted") { id } }
+     }' -F owner="${REPO%/*}" -F name="${REPO#*/}" --jq '.data.repository.label.id')
+
+   # Apply — DISCUSSION_ID came from step 4's createDiscussion mutation
+   gh api graphql -f query='
+     mutation($labelable:ID!, $labels:[ID!]!) {
+       addLabelsToLabelable(input:{labelableId:$labelable, labelIds:$labels}) {
+         labelable { ... on Discussion { number url } }
+       }
+     }' -F labelable="$DISCUSSION_ID" -f labels="$LABEL_ID"
    ```
-   (Discussions use the shared `/issues/<number>/labels` endpoint — GitHub unified the label system.)
 
 6. **Report** the URL. Remind the user: the `ai-drafted` label stays on until *they* remove it or swap it for `ai-reviewed`. The skill never auto-promotes.
 
