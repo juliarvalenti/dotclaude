@@ -1,10 +1,10 @@
 ---
-name: agent-handoff
+name: handoff
 description: Assemble a compact context packet you can paste into a fresh Claude Code session to pick up where the current one left off. Use when the user says "hand off", "pack up", "context dump for new session", "summarize and give me something to paste".
 user_invocable: true
 ---
 
-# Agent Handoff
+# Handoff
 
 Produce a markdown packet that captures just enough context for a fresh session to continue the work. The goal is density, not completeness — the new session will explore the code itself.
 
