@@ -9,7 +9,7 @@ user_invocable: true
 Write a durable note into GitHub. Two destinations, same skill:
 
 - **PR comment** — mid-session checkpoints. Short, factual, tied to current work. Lives on the PR forever as the archaeology of how it came together.
-- **Discussion** — long-form context that outlives any one PR. Design rationale, architecture notes, concept pages, anything you'd want to find months later.
+- **Discussion** — shared, persistent knowledge for the team. Long-form context that outlives any one PR: design rationale, architecture notes, concept pages, onboarding material — anything that should be findable by anyone on the project, months later, without spelunking through merged PRs.
 
 ## Why Discussions, not wiki
 
