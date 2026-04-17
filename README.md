@@ -34,7 +34,7 @@ Not a framework. Not opinions for anyone else. This is scaffolding I copy into n
 - **[`skills/docker/`](skills/docker/SKILL.md)** — containers + compose (list, logs, shell, prune, up/down)
 - **[`skills/pm2/`](skills/pm2/SKILL.md)** — PM2 process ops (list, logs, restart, stop, delete), local or over SSH
 - **[`skills/ship/`](skills/ship/SKILL.md)** — full flow from changes to merged PR (branch → precommit → commit → PR → watch → merge)
-- **[`skills/note/`](skills/note/SKILL.md)** — drop a mid-session progress comment on the current branch's PR
+- **[`skills/note/`](skills/note/SKILL.md)** — drop a durable note: PR comment (in-progress) or GitHub wiki page (long-form, outlives the PR)
 - **[`skills/release/`](skills/release/SKILL.md)** — tag + changelog + GitHub release (patch/minor/major bump)
 
 ## How I use this
