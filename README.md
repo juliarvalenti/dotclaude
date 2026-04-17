@@ -21,9 +21,8 @@ Not a framework. Not opinions for anyone else. This is scaffolding I copy into n
 - **[`skills/last-download/`](skills/last-download/SKILL.md)** — read the most recent file in `~/Downloads/`
 - **[`skills/kill-port/`](skills/kill-port/SKILL.md)** — free a TCP port
 - **[`skills/agent-handoff/`](skills/agent-handoff/SKILL.md)** — pack a context dump for a fresh session
-- **[`skills/docker-ps/`](skills/docker-ps/SKILL.md)**, **[`docker-logs/`](skills/docker-logs/SKILL.md)**, **[`docker-shell/`](skills/docker-shell/SKILL.md)**, **[`docker-clean/`](skills/docker-clean/SKILL.md)** — container ops
-- **[`skills/compose-up/`](skills/compose-up/SKILL.md)**, **[`compose-down/`](skills/compose-down/SKILL.md)** — find and run the nearest `docker-compose.yml`
-- **[`skills/pm2-list/`](skills/pm2-list/SKILL.md)**, **[`pm2-logs/`](skills/pm2-logs/SKILL.md)**, **[`pm2-restart/`](skills/pm2-restart/SKILL.md)**, **[`pm2-stop/`](skills/pm2-stop/SKILL.md)** — PM2 process ops (local or over SSH)
+- **[`skills/docker/`](skills/docker/SKILL.md)** — containers + compose (list, logs, shell, prune, up/down)
+- **[`skills/pm2/`](skills/pm2/SKILL.md)** — PM2 process ops (list, logs, restart, stop, delete), local or over SSH
 
 ## How I use this
 
