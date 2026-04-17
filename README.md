@@ -9,7 +9,10 @@ Not a framework. Not opinions for anyone else. This is scaffolding I copy into n
 - **[`CLAUDE.template.md`](CLAUDE.template.md)** — blank CLAUDE.md with my canonical sections and inline notes on what goes where
 - **[`STYLE.md`](STYLE.md)** — the 12 patterns I actually use, with "when to use it" and "when to skip it"
 - **[`skills/precommit/`](skills/precommit/SKILL.md)** — generic precommit skill to fork per project
-- **[`skills/last-screenshot/`](skills/last-screenshot/SKILL.md)** — view the most recent screenshot (already global for me)
+- **[`skills/last-screenshot/`](skills/last-screenshot/SKILL.md)** — view the most recent screenshot
+- **[`skills/where-was-i/`](skills/where-was-i/SKILL.md)** — reconstruct context from git state at the start of a session
+- **[`skills/session-search/`](skills/session-search/SKILL.md)** — grep past Claude Code sessions efficiently (skips noisy tool results / hooks)
+- **[`skills/modern-python/`](skills/modern-python/SKILL.md)** — uv / ruff / pytest practices. Upstream from [trailofbits/skills](https://github.com/trailofbits/skills), CC BY-SA 4.0 (see skill's `ATTRIBUTION.md`)
 
 ## How I use this
 
