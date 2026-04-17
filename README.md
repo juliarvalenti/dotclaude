@@ -42,3 +42,7 @@ Not a framework. Not opinions for anyone else. This is scaffolding I copy into n
 - **No speculative sections.** If the project doesn't have a gotcha list yet, don't add an empty heading.
 - **Terse.** CLAUDE.md is read by an agent on every turn — every line should pay rent.
 - **Project-specific, not shared.** I intentionally don't merge rules across projects. Each CLAUDE.md is tuned to one codebase.
+
+## What this isn't
+
+I intentionally avoid persona skills — no `pr-reviewer`, no `code-writer`, no `research-partner`, no "you are an expert X who always Y." Those patterns ask the agent to play a character, which bloats context and doesn't compose. This repo treats the skill system as **macros**: shortcuts I can invoke mid-flow to request a specific action, load only the context I need, and manipulate the agent's behavior in the moment. Aimed at pair-coding, not autonomous agents.
