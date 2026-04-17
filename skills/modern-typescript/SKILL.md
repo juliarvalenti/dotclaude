@@ -255,6 +255,20 @@ Standard names across every project. Agents (and you) should never have to guess
 
 Monorepo root runs via turbo (`turbo run lint`), package-level scripts do the actual work.
 
+## Next.js: co-locate `route.ts` + `hook.ts`
+
+For every API route, put the SWR hook in the same directory as the route handler. Types defined once in `route.ts`, imported by `hook.ts`.
+
+```
+src/app/(protected)/api/interviews/[interviewId]/
+├── route.ts         # server handlers + exported response type
+└── hook.ts          # "use client" SWR hook, imports types from ./route
+```
+
+Why: one grep finds both halves of an endpoint, and TypeScript breaks the build if the hook and handler disagree on shape.
+
+See [`references/nextjs-route-hook.md`](references/nextjs-route-hook.md) for the full pattern (response shape, mutations, conditional fetching, anti-patterns).
+
 ## Key Patterns
 
 - **Prisma + Next.js is the default stack**. Deviations should be deliberate.
