@@ -1,15 +1,18 @@
 ---
 name: recall
-description: Reconstruct context — either current repo state ("where was I") or by searching past Claude Code sessions ("what did we decide about X"). Use when the user says "where was I", "pick up where we left off", "what did we say about Y", "find the session where we discussed Z".
+description: Reconstruct context — current repo state ("where was I"), past Claude Code sessions ("what did we decide"), or past PRs ("didn't we already do this"). Use when the user says "where was I", "pick up where we left off", "what did we say about Y", "find the session where we discussed Z", "didn't we close a PR for this", "find the PR that touched X".
 user_invocable: true
 ---
 
 # Recall
 
-Two modes. Match the user's intent:
+Three modes. Match the user's intent:
 
 - **Current state** ("where was I", "what was I doing", "pick up") → [Current repo mode](#current-repo-mode)
 - **Past sessions** ("what did we decide", "find the session where", "when did we") → [Session search mode](#session-search-mode)
+- **Past PRs** ("didn't we close a PR", "find the PR that touched X", "we did this before") → [PR search mode](#pr-search-mode)
+
+PRs are often the best source for "have we solved this before" — they pair the full diff with a reader-facing description and running commentary. Prefer PR search over session search when the work was likely merged.
 
 ---
 
@@ -116,3 +119,68 @@ Offer to read the full session or a broader excerpt.
 - `isSidechain:true` events are subagent runs — usually skip for "what did I say" queries
 - User-role filter is gold when the question is "what did I say about X"
 - For repeat searches in one conversation, consider dumping `{timestamp, type, text}` to a sidecar file the first time, then grep those — cheap cache
+
+---
+
+## PR search mode
+
+Past PRs are often the best source for "have we solved this before." Body + comments + diff live together under a human-edited description.
+
+### Repo-scoped search
+
+When the user is in a repo and asking about its history:
+
+```bash
+gh pr list --state all --search "<query>" --limit 10 \
+  --json number,title,state,mergedAt,headRefName,url \
+  --template '{{range .}}{{.number}}	{{.state}}	{{.mergedAt | timeago}}	{{.title}}	{{.url}}{{"\n"}}{{end}}'
+```
+
+**Query tips:**
+- `in:title <term>` — search titles only
+- `author:@me` — PRs you opened
+- `is:merged` / `is:closed` / `is:open`
+- `<filename>` — GitHub search indexes changed paths, so `src/lib/client.ts` finds PRs that touched that file
+- `<keyword>` alone searches title + body + comments
+
+### Cross-repo search (user-wide)
+
+When the question spans multiple repos ("have I ever worked on auth redirects"):
+
+```bash
+gh search prs "<query>" --author=@me --limit 10 \
+  --json number,title,repository,url,state \
+  --template '{{range .}}{{.repository.nameWithOwner}}#{{.number}}	{{.state}}	{{.title}}	{{.url}}{{"\n"}}{{end}}'
+```
+
+### Read a specific PR in full
+
+```bash
+gh pr view <number> --comments
+gh pr diff <number>
+```
+
+`--comments` includes the description plus every top-level comment and review comment. The diff is attached separately — you can pipe it through `grep`, `head`, or feed specific files.
+
+For just the description:
+```bash
+gh pr view <number> --json title,body,mergedAt,url -q '{title, body, mergedAt, url}'
+```
+
+### Report
+
+For each hit:
+- **Repo#PR**: `owner/repo#123`
+- **State**: merged / closed / open
+- **When**: relative (`merged 3 days ago`)
+- **Title** and **URL**
+- **One-line summary** of relevance — pull a matching line from the body or comment if a query term appears there, so the user sees *why* this PR was returned.
+
+Offer to pull the full description, comments, or diff for any of the hits.
+
+### When to reach for PR search vs session search
+
+- **Merged work** → PR search (cleaner signal, includes the final state + rationale)
+- **Unmerged exploration, things we ruled out, half-built ideas** → session search
+- **"What did *I* say about X" (my reasoning, not code)** → session search with user-role filter
+- **"Where did we build X", "how did we solve Y"** → PR search

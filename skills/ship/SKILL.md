@@ -91,6 +91,17 @@ EOF
 
 Keep the title under 70 chars — use the body for detail. Match any repo-specific PR template if one exists (`.github/pull_request_template.md`).
 
+**Tone — the description is the artifact, not a diary.**
+
+The PR body describes the finished change for a reader who wasn't in the session. It's long-term documentation that future-you and your coworkers will grep through.
+
+- **Do**: describe what *is* — the current behavior, the current code structure, why the design makes sense given the constraints.
+- **Don't**: narrate the session's back-and-forth. No "we originally tried X", "after iteration we landed on Y", "pivoted from ... to ...", "initially implemented ... but then refactored ..." That's session history, not documentation.
+- **If a decision is worth capturing**, frame it reader-facing: "Chose X because [constraint]" — not "moved away from Y." The reader wants to understand the current state and why it's the current state. They don't need the archaeology.
+- **Link related PRs** if there's real prior work in this area (`#123`). If not, don't fabricate links.
+
+Rule of thumb: if you can't state a fact without saying "we" or referring to something we tried and dropped, it probably doesn't belong in the PR body.
+
 ### 7. Watch checks
 
 ```bash
