@@ -15,8 +15,17 @@ This skill pings the session just under that window so the cache stays warm.
 `/caffeinate [count]` — hand off to `/loop` on a 4-minute cadence with a trivial keep-alive turn, and stop after `count` ticks.
 
 - **Default count: 15** (~1 hour of keep-alive)
-- **Max: 60** (~4 hours — refuse higher, or ask the user to confirm)
+- **Reliable range: up to 30** (~2 hours). Beyond that, the self-count drifts — see below.
+- **Max: 60** (~4 hours — ask the user to confirm; offer the cron fallback for long runs).
 - `count` is the stop condition. Track tick number in your turn state; when the loop fires for tick `N+1`, don't ping — instead, cancel the loop and tell the user caffeinate finished.
+
+### Counting caveat
+
+`/loop` has no tick budget of its own — every firing is a separate prompt invocation, so the model has to count its own prior acknowledgments in conversation history to know which tick it's on. Reliable up to ~30. For higher counts with lots of intervening messages, the model can miscount and stop early or overshoot. For long bulletproof runs, prefer `/schedule` with N one-shot triggers at 4/8/…/N×4 min.
+
+### Pre-flight check
+
+Before starting, make sure no other `/loop` is already running in this session — caffeinate + an existing loop = double-ping (wasted turns, noisy log). If one is running, either cancel it first or skip caffeinate entirely (the existing loop already keeps the cache warm).
 
 4 minutes (240s) sits safely under the 300s TTL with ~60s of slack for scheduling jitter. Each loop tick re-reads the conversation, which re-references the cached prefix → TTL resets.
 
