@@ -47,6 +47,8 @@ Not a framework. Not opinions for anyone else. This is scaffolding I copy into n
 
 **Auditing an existing project:** run through `STYLE.md` and see which sections are missing or stale.
 
+**Adding a new skill to this repo:** drop it in `skills/<name>/SKILL.md`, then add a one-line bullet for it under the matching section above (boilerplate / utility). The README is the index — a skill that isn't listed here is invisible.
+
 ## Principles
 
 - **Concrete over abstract.** Real file paths, real commands, never "it depends."
