@@ -31,6 +31,7 @@ Not a framework. Not opinions for anyone else. This is scaffolding I copy into n
 - **[`skills/net/`](skills/net/SKILL.md)** — ports (show / kill / all listening), local + public IP, DNS lookup
 - **[`skills/disk/`](skills/disk/SKILL.md)** — observational disk usage: free space, biggest dirs, Docker disk, drill-down
 - **[`skills/notify/`](skills/notify/SKILL.md)** — send a macOS notification from the agent (task done, input needed)
+- **[`skills/caffeinate/`](skills/caffeinate/SKILL.md)** — keep the prompt cache warm while stepping away (4-min `/loop` ping, beats the 5-min TTL rewrite)
 - **[`skills/docker/`](skills/docker/SKILL.md)** — containers + compose (list, logs, shell, prune, up/down)
 - **[`skills/pm2/`](skills/pm2/SKILL.md)** — PM2 process ops (list, logs, restart, stop, delete), local or over SSH
 - **[`skills/ship/`](skills/ship/SKILL.md)** — full flow from changes to merged PR (branch → precommit → commit → PR → watch → merge)
